@@ -1,12 +1,6 @@
 #include <iostream>
+#include "libreria.h"
 using namespace std;
-
-typedef int E;
-typedef char C;
-typedef float F;
-//quiero hacer typedefs de los punteros y estructuras pero vemos
-
-
 struct timestamp{
 	E day;
 	E month;
@@ -29,14 +23,23 @@ struct city{
 };
 
 
-E menu(void);
+
 
 int main(int argc, char *argv[]) {
 	E op=0;
+
+	FILE *fp;
+	fp=fopen("./data_set.txt","r");
+	if (fp==NULL){
+		cout<<"Imposible abrir el archivo";
+		exit(1);
+	}
+
 	do{
 		op=menu();
 		switch(op){
 		case 1:
+			total();
 			break;
 		case 2:
 			break;
@@ -54,16 +57,10 @@ int main(int argc, char *argv[]) {
 			break;
 		case 0: break;
 		default:
-			cout<<"Lo sentimos, esta opción no existe, inténtelo de nuevo"<<endl;
+			cout<<"Lo sentimos, esta opciÃ³n no existe, intÃ©ntelo de nuevo"<<endl;
 			break;
 		}
 	}while(op!=0);
 	return 0;
 }
 
-E menu (void){
-	E op;
-	cout<<"Ingrese una opción: \n 1. Total de las muestras almacenadas en las listas pertenecientes a cada provincia\n 2. Temperatura promedio de cada provincia\n 3.Temperatura promedio de cada ciudad\n 4.Ciudad más cálida de cada provincia\n 5. Ciudad mas fría de cada provincia\n 6. Día más frío de cada provincia\n 7. Día más cálido de cada ciudad\n 8. Mejor provincia para el cultivo de pimientos (temperatura promedio cercana a 23 grados centígrados)\n 0.Salir"<<endl;
-	cin>>op;
-	return op;
-}
