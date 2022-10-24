@@ -1,12 +1,14 @@
 #include <iostream>
 #include "libreria.h"
-#include "libreria.c"
+#include "libreria.cpp"
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	E op=0;
-	
-	City ciudad;
+	E op=0, i=0;
+
+	Provincia Cordoba;
+	Provincia Mendoza;
+	Provincia SF;
 	
 	FILE *fp;
 	fp=fopen("./data_set.txt","r");
@@ -14,34 +16,52 @@ int main(int argc, char *argv[]) {
 		cout<<"Imposible abrir el archivo";
 		exit(1);
 	}
+	
+
 	fclose(fp);
 	
 	do{
 		op=menu();
 		switch(op){
 		case 1:
-			ciudad.total(fp);
+			Cordoba.total();
+			Mendoza.total();
+			SF.total();
 			break;
 		case 2:
-			ciudad.promProv();
+			Cordoba.promProv();
+			Mendoza.promProv();
+			SF.promProv();
 			break;
 		case 3:
-			ciudad.promCiud();
+			Cordoba.promCiud();
+			Mendoza.promCiud();
+			SF.promCiud();
 			break;
 		case 4:
-			ciudad.ciudadCalida();
+			Cordoba.ciudadCalida();
+			Mendoza.ciudadCalida();
+			SF.ciudadCalida();
 			break;
 		case 5:
-			ciudad.ciudadFria();
+			Cordoba.ciudadFria();
+			Mendoza.ciudadFria();
+			SF.ciudadFria();
 			break;
 		case 6:
-			ciudad.diaFrio();
+			Cordoba.diaFrio();
+			Mendoza.diaFrio();
+			SF.diaFrio();
 			break;
 		case 7:
-			ciudad.diaCalido();
+			Cordoba.diaCalido();
+			Mendoza.diaCalido();
+			SF.diaCalido();
 			break;
 		case 8:
-			ciudad.plantarPimientos();
+			Cordoba.plantarPimientos();
+			Mendoza.plantarPimientos();
+			SF.plantarPimientos();
 			break;
 		case 0: 
 			break;
@@ -52,6 +72,5 @@ int main(int argc, char *argv[]) {
 	}while(op!=0);
 	return 0;
 }
-
 
 

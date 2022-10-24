@@ -12,20 +12,21 @@ typedef void V;
 
 E menu(V);
 
-class City{
-private:
-	struct city;
-public:
-	City(V);
-	V total(FILE *);
-	V promProv(V);
-	V promCiud(V);
-	V ciudadCalida(V);
-	V ciudadFria(V);
-	V diaFrio(V);
-	V diaCalido(V);
-	V plantarPimientos(V);
-	
+class Provincia{
+	private:
+		struct city ciudades[55];
+		E id;
+	public:
+		V setData(V);
+		V total(V);
+		V promProv(V);
+		V promCiud(V);
+		V ciudadCalida(V);
+		V ciudadFria(V);
+		V diaFrio(V);
+		V diaCalido(V);
+		V plantarPimientos(V);
+		
 };
 
 struct timestamp{
@@ -48,6 +49,5 @@ struct city{
 	E cityId;
 	C cityName[50];
 };
-
 
 #endif
