@@ -5,49 +5,45 @@
 #include <cstring>
 using namespace std;
 
-typedef int E;
-typedef char C;
-typedef float F;
-typedef void V;
-
-E menu(V);
-
-class Provincia{
-	private:
-		struct city ciudades[55];
-		E id;
-	public:
-		V setData(V);
-		V total(V);
-		V promProv(V);
-		V promCiud(V);
-		V ciudadCalida(V);
-		V ciudadFria(V);
-		V diaFrio(V);
-		V diaCalido(V);
-		V plantarPimientos(V);
-		
-};
+int menu(void);
 
 struct timestamp{
-	E day;
-	E month;
-	E hh;
-	E mm;
+	int day;
+	int month;
+	int hh;
+	int mm;
 };
 
 struct measurement{
 	struct timestamp time;
-	F temp;
-	F hum;
+	float temp;
+	float hum;
 };
 
 
 struct city{
 	struct city *next;
 	struct measurement m;
-	E cityId;
-	C cityName[50];
+	int cityId;
+	char cityName[50];
 };
+
+class Provincia{
+	private:
+		struct city ciudades;
+	public:
+		void setData(int);
+		void total(void);
+		void promProv(void);
+		void promCiud(void);
+		void ciudadCalida(void);
+		void ciudadFria(void);
+		void diaFrio(void);
+		void diaCalido(void);
+		void plantarPimientos(void);
+		
+};
+
+
 
 #endif
