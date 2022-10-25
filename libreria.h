@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-
 int menu(void);
 
 struct timestamp{
@@ -32,9 +31,9 @@ class Provincia{
 	private:
 		struct city ciudades;
 	public:
-		void setData(int);
-		void total(void);
-		void promProv(void);
+		Provincia(int);
+		int total(int);
+		float promProv(int, int);
 		void promCiud(void);
 		void ciudadCalida(void);
 		void ciudadFria(void);

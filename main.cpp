@@ -4,39 +4,25 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	int op=0;
+	int op=0, cba_med=0, men_med=0, sf_med=0;
+	float tempcba=0, tempmen=0, tempsf=0;
 
-	Provincia Cordoba;
-	Cordoba.setData(1);
-	Provincia Mendoza;
-	Mendoza.setData(2);
-	Provincia SF;
-	SF.setData(3);
-
-	
-	
-	FILE *fp;
-	fp=fopen("./data_set.txt","r");
-	if (fp==NULL){
-		cout<<"Imposible abrir el archivo";
-		exit(1);
-	}
-	
-
-	fclose(fp);
+	Provincia Cordoba(1);
+	Provincia Mendoza(2);
+	Provincia SF(3);
 	
 	do{
 		op=menu();
 		switch(op){
 		case 1:
-			Cordoba.total();
-			Mendoza.total();
-			SF.total();
+			cba_med=Cordoba.total(1);
+			men_med=Mendoza.total(2);
+			sf_med=SF.total(3);
 			break;
 		case 2:
-			Cordoba.promProv();
-			Mendoza.promProv();
-			SF.promProv();
+			tempcba=Cordoba.promProv(1, cba_med);
+			tempmen=Mendoza.promProv(2, men_med);
+			tempsf=SF.promProv(3, sf_med);
 			break;
 		case 3:
 			Cordoba.promCiud();
