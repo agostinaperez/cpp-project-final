@@ -23,8 +23,9 @@ Provincia::Provincia(int num)
 	}
 	
 	while (!feof(fp))
-	{ 	//SEGURAMENTE AC� HAY UN ERROR
-		fscanf(fp, "%d, %d, %c, %f, %f, %d, %d, %d, %d", &codCiud, &codProv, &nombre[50], &temp, &hum, &hh, &mm, &day, &month);
+	{ 	
+		//SEGURAMENTE AC� HAY UN ERROR
+		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
 		
 		//APARENTEMENTE AC� NO HAY ERROR PORQUE BORR� ESTA PARTE DEL C�DIGO Y ME DABA EL MISMO PROBLEMA IGUAL.
 		if (codProv == num)
@@ -59,13 +60,13 @@ Provincia::Provincia(int num)
 	
 	fclose(fp);
 	
-	copy=head;
-	while (copy!=NULL){
-		cout<<copy->cityId;
-		cout<<copy->cityName;
-		cout<<copy->m.temp;
-		copy=copy->next;
-	}
+	/*copy=head;
+		while (copy!=NULL){
+			cout<<copy->cityId;
+			cout<<copy->cityName;
+			cout<<copy->m.temp;
+			copy=copy->next;
+	*/
 }
 
 int Provincia::total(int num)
@@ -127,7 +128,7 @@ float Provincia::promProv(int code, int med)
 	//en vez de leer el archivo acá debería recorrer la lista e ir sumando!
 	//bueno. Acá ya se me hizo un lío. Hasta no descifrar todo el comportamiento de la estructura, me voy a queddar tildada.
 	
-
+	return (0.01);
 
 }
 

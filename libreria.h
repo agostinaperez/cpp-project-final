@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <cstring>
+#include <stdlib.h>
+#include <stdio.h>
+
 using namespace std;
 int menu(void);
 

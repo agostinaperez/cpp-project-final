@@ -7,9 +7,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/agosl/OneDrive/Escritorio/cpp-project-final",
-      "program": "c:/Users/agosl/OneDrive/Escritorio/cpp-project-final/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/agostina/Desktop/cpp-project-final/cpp-project-final",
+      "program": "/home/agostina/Desktop/cpp-project-final/cpp-project-final/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
