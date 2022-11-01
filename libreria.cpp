@@ -9,64 +9,8 @@ int menu()
 }
 
 Mediciones::Mediciones()
-{	city *cba=NULL, *sf=NULL, *mendoza=NULL;
-	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
-	float hum = 0, temp = 0;
-	char nombre[50];
-	city *newCity = NULL, *copy=NULL, *head=NULL;
-
-	FILE *fp;
-	fp=fopen("./data_set.txt","r");
-	if (fp==NULL){
-		cout<<"Imposible abrir el archivo";
-		exit(1);
-	}
-	
-	while (!feof(fp))
-	{ 	
-		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
-		
-	
-		if (codProv == 1)
-		{
-			Mediciones->*provincia=cba;
-			newCity = new (city);
-			cba.cityId= codCiud;
-			strcpy(newCity->cityName, nombre);
-			newCity->m.hum = hum;
-			newCity->m.temp = temp;
-			newCity->m.time.day = day;
-			newCity->m.time.month = month;
-			newCity->m.time.hh = hh;
-			newCity->m.time.mm = mm;
-			newCity->next = NULL;
-			
-
-			cout<<codProv<<endl;
-			cout<<newCity->m.temp<<endl;
-			cout<<newCity->cityName<<endl;
-			
-			if (head == NULL)
-			{
-				head = newCity;
-			}
-			else
-			{
-				copy = head;
-				while (copy == NULL)
-				{
-					copy = copy->next;
-				}
-				copy->next = newCity;
-			}
-			
-
-			
-		}
-	}
-	
-	fclose(fp);
-	
+{	
+	cout<<"se creo un nuevo objeto :D"<<endl;
 }
 
 int Mediciones::total(int num)
@@ -92,7 +36,8 @@ int Mediciones::total(int num)
 			}
 		}
 	}
-	fclose(fp);
+
+	delete(fp);
 
 	if (num==1){
 		cout<<"La cantidad de mediciones tomadas en Córdoba es de: "<<cba;
@@ -151,4 +96,61 @@ void Mediciones::diaFrio()
 
 void Mediciones::plantarPimientos()
 {
+}
+
+void Mediciones::setData(int i){
+	city *cba=NULL, *sf=NULL, *mendoza=NULL;
+	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
+	float hum = 0, temp = 0;
+	char nombre[50];
+	city *newCity = NULL, *copy=NULL, *head=NULL;
+
+	FILE *fp;
+	fp=fopen("./data_set.txt","r");
+	if (fp==NULL){
+		cout<<"Imposible abrir el archivo";
+		exit(1);
+	}
+	
+	while (!feof(fp))
+	{ 	
+		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
+		
+	
+		if ((codProv-1) == i){
+			this->provincia.cityId= codCiud;
+			strcpy(this->provincia.cityName, nombre);
+			this->provincia.m.hum = hum;
+			this->provincia.m.temp = temp;
+			this->provincia.m.time.day = day;
+			this->provincia.m.time.month = month;
+			this->provincia.m.time.hh= hh;
+			this->provincia.m.time.mm= mm;
+			this->provincia.next= NULL;
+			
+
+			cout<<codProv<<endl;
+			cout<<provincia.cityName<<endl;
+			cout<<provincia.cityId<<endl;
+			
+			if (head == NULL)
+			{
+				head = newCity;
+			}
+			else
+			{
+				copy = head;
+				while (copy == NULL)
+				{
+					copy = copy->next;
+				}
+				copy->next = newCity;
+			}
+			
+
+			
+		}
+	}
+	
+	delete(fp);
 }

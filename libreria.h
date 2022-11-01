@@ -31,11 +31,12 @@ struct city{
 	char cityName[50];
 };
 
-class Provincia{
+class Mediciones{
 	private:
-		struct city ciudades;
+		struct city provincia;
 	public:
-		Provincia(int);
+		Mediciones(void);
+		void setData(int);
 		int total(int);
 		float promProv(int, int);
 		void promCiud(void);
