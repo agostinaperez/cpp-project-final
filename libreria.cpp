@@ -8,8 +8,8 @@ int menu()
 	return op;
 }
 
-Provincia::Provincia(int num)
-{	city *provincias[3]={NULL};
+Mediciones::Mediciones()
+{	city *cba=NULL, *sf=NULL, *mendoza=NULL;
 	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
 	float hum = 0, temp = 0;
 	char nombre[50];
@@ -27,10 +27,11 @@ Provincia::Provincia(int num)
 		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
 		
 	
-		if (codProv == num)
+		if (codProv == 1)
 		{
+			Mediciones->*provincia=cba;
 			newCity = new (city);
-			newCity->cityId = codCiud;
+			cba.cityId= codCiud;
 			strcpy(newCity->cityName, nombre);
 			newCity->m.hum = hum;
 			newCity->m.temp = temp;
@@ -40,7 +41,7 @@ Provincia::Provincia(int num)
 			newCity->m.time.mm = mm;
 			newCity->next = NULL;
 			
-			cout<<num<<endl;
+
 			cout<<codProv<<endl;
 			cout<<newCity->m.temp<<endl;
 			cout<<newCity->cityName<<endl;
@@ -60,7 +61,6 @@ Provincia::Provincia(int num)
 			}
 			
 
-			provincias[num-1]=newCity;
 			
 		}
 	}
@@ -69,7 +69,7 @@ Provincia::Provincia(int num)
 	
 }
 
-int Provincia::total(int num)
+int Mediciones::total(int num)
 {	int cod=0, codP=0, cba=0, men=0, sf=0;
 	FILE *fp;
 	fp=fopen("./data_set.txt","r");
@@ -109,13 +109,13 @@ int Provincia::total(int num)
 
 }
 
-void Provincia::promCiud()
+void Mediciones::promCiud()
 {
 }
 
-float Provincia::promProv(int code, int med)
+float Mediciones::promProv(int code, int med)
 {	city *head=NULL, *copy=NULL;
-	head=&ciudades; //???????
+	
 	
 	float temp=0, promcba=0, prommen=0, promsf=0;
 	char name;
@@ -133,22 +133,22 @@ float Provincia::promProv(int code, int med)
 }
 
 
-void Provincia::ciudadCalida()
+void Mediciones::ciudadCalida()
 {
 }
 
-void Provincia::ciudadFria()
+void Mediciones::ciudadFria()
 {
 }
 
-void Provincia::diaCalido()
+void Mediciones::diaCalido()
 {
 }
 
-void Provincia::diaFrio()
+void Mediciones::diaFrio()
 {
 }
 
-void Provincia::plantarPimientos()
+void Mediciones::plantarPimientos()
 {
 }
