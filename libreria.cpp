@@ -9,7 +9,7 @@ int menu()
 }
 
 Provincia::Provincia(int num)
-{
+{	city *provincias[3]={NULL};
 	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
 	float hum = 0, temp = 0;
 	char nombre[50];
@@ -24,13 +24,11 @@ Provincia::Provincia(int num)
 	
 	while (!feof(fp))
 	{ 	
-		//SEGURAMENTE AC� HAY UN ERROR
 		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
 		
-		//APARENTEMENTE AC� NO HAY ERROR PORQUE BORR� ESTA PARTE DEL C�DIGO Y ME DABA EL MISMO PROBLEMA IGUAL.
+	
 		if (codProv == num)
 		{
-			// tengo q ver si hacer el array o como
 			newCity = new (city);
 			newCity->cityId = codCiud;
 			strcpy(newCity->cityName, nombre);
@@ -41,6 +39,11 @@ Provincia::Provincia(int num)
 			newCity->m.time.hh = hh;
 			newCity->m.time.mm = mm;
 			newCity->next = NULL;
+			
+			cout<<num<<endl;
+			cout<<codProv<<endl;
+			cout<<newCity->m.temp<<endl;
+			cout<<newCity->cityName<<endl;
 			
 			if (head == NULL)
 			{
@@ -55,18 +58,15 @@ Provincia::Provincia(int num)
 				}
 				copy->next = newCity;
 			}
+			
+
+			provincias[num-1]=newCity;
+			
 		}
 	}
 	
 	fclose(fp);
 	
-	/*copy=head;
-		while (copy!=NULL){
-			cout<<copy->cityId;
-			cout<<copy->cityName;
-			cout<<copy->m.temp;
-			copy=copy->next;
-	*/
 }
 
 int Provincia::total(int num)

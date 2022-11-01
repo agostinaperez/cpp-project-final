@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 using namespace std;
 int menu(void);
 
@@ -45,7 +46,6 @@ class Provincia{
 		void plantarPimientos(void);
 		
 };
-
 
 
 #endif
