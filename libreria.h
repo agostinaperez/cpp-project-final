@@ -31,11 +31,13 @@ struct city{
 	char cityName[50];
 };
 
-class Provincia{
+class Archivo{
 	private:
-		struct city ciudades;
+		FILE *fp;
 	public:
-		Provincia(int);
+		Archivo();
+		};
+
 		int total(int);
 		float promProv(int, int);
 		void promCiud(void);
@@ -44,8 +46,5 @@ class Provincia{
 		void diaFrio(void);
 		void diaCalido(void);
 		void plantarPimientos(void);
-		
-};
-
 
 #endif

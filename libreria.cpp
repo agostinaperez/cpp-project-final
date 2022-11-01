@@ -8,12 +8,12 @@ int menu()
 	return op;
 }
 
-Provincia::Provincia(int num)
-{	city *provincias[3]={NULL};
-	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
+Archivo::Archivo()
+{	
+	/*int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
 	float hum = 0, temp = 0;
 	char nombre[50];
-	city *newCity = NULL, *copy=NULL, *head=NULL;
+	city *newCity = NULL, *copy=NULL, *head=NULL;*/
 
 	FILE *fp;
 	fp=fopen("./data_set.txt","r");
@@ -21,7 +21,7 @@ Provincia::Provincia(int num)
 		cout<<"Imposible abrir el archivo";
 		exit(1);
 	}
-	
+	/*
 	while (!feof(fp))
 	{ 	
 		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
@@ -39,7 +39,7 @@ Provincia::Provincia(int num)
 			newCity->m.time.hh = hh;
 			newCity->m.time.mm = mm;
 			newCity->next = NULL;
-			
+
 			cout<<num<<endl;
 			cout<<codProv<<endl;
 			cout<<newCity->m.temp<<endl;
@@ -60,16 +60,16 @@ Provincia::Provincia(int num)
 			}
 			
 
-			provincias[num-1]=newCity;
+			*provincias[num-1]=newCity;
 			
 		}
-	}
+	} */
 	
 	fclose(fp);
 	
 }
 
-int Provincia::total(int num)
+int total(int num)
 {	int cod=0, codP=0, cba=0, men=0, sf=0;
 	FILE *fp;
 	fp=fopen("./data_set.txt","r");
@@ -109,12 +109,12 @@ int Provincia::total(int num)
 
 }
 
-void Provincia::promCiud()
+void promCiud()
 {
 }
 
-float Provincia::promProv(int code, int med)
-{	city *head=NULL, *copy=NULL;
+float promProv(int code, int med)
+{	/*city *head=NULL, *copy=NULL;
 	head=&ciudades; //???????
 	
 	float temp=0, promcba=0, prommen=0, promsf=0;
@@ -128,27 +128,27 @@ float Provincia::promProv(int code, int med)
 	//en vez de leer el archivo acá debería recorrer la lista e ir sumando!
 	//bueno. Acá ya se me hizo un lío. Hasta no descifrar todo el comportamiento de la estructura, me voy a queddar tildada.
 	
-	return (0.01);
+	return (0.01);*/
 
 }
 
 
-void Provincia::ciudadCalida()
+void ciudadCalida()
 {
 }
 
-void Provincia::ciudadFria()
+void ciudadFria()
 {
 }
 
-void Provincia::diaCalido()
+void diaCalido()
 {
 }
 
-void Provincia::diaFrio()
+void diaFrio()
 {
 }
 
-void Provincia::plantarPimientos()
+void plantarPimientos()
 {
 }
