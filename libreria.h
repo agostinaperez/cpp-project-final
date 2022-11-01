@@ -33,18 +33,19 @@ struct city{
 
 class Archivo{
 	private:
-		FILE *fp;
+		FILE *file;
 	public:
 		Archivo();
-		};
+		void get(void);
+};
 
-		int total(int);
-		float promProv(int, int);
-		void promCiud(void);
-		void ciudadCalida(void);
-		void ciudadFria(void);
-		void diaFrio(void);
-		void diaCalido(void);
-		void plantarPimientos(void);
+int total(int);
+float promProv(int, int);
+void promCiud(void);
+void ciudadCalida(void);
+void ciudadFria(void);
+void diaFrio(void);
+void diaCalido(void);
+void plantarPimientos(void);
 
 #endif

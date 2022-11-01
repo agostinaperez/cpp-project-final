@@ -4,11 +4,16 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	city *provincias[3]={NULL};
+
+	city *Cordoba=NULL, *SF=NULL, *Mendoza=NULL;
+
+	Archivo archivo;
+
 	int op=0, cba_med=0, men_med=0, sf_med=0;
 	float tempcba=0, tempmen=0, tempsf=0;
 
-	//ntengo q crear las estructuras
+	archivo.get();
+	
 	
 	do{
 		op=menu();

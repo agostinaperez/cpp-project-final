@@ -10,17 +10,16 @@ int menu()
 
 Archivo::Archivo()
 {	
-	/*int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
-	float hum = 0, temp = 0;
-	char nombre[50];
-	city *newCity = NULL, *copy=NULL, *head=NULL;*/
-
 	FILE *fp;
 	fp=fopen("./data_set.txt","r");
+	
 	if (fp==NULL){
 		cout<<"Imposible abrir el archivo";
 		exit(1);
+	}else{
+		this->file=fp;
 	}
+	fclose(fp);
 	/*
 	while (!feof(fp))
 	{ 	
@@ -65,8 +64,27 @@ Archivo::Archivo()
 		}
 	} */
 	
+}
+
+void Archivo::get(){
+	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
+	float hum = 0, temp = 0;
+	char nombre[50];
+	city *newCity = NULL, *copy=NULL, *head=NULL;
+	FILE *fp=NULL;
+	fp=fopen("./data_set.txt","r");
+	while (!feof(fp))
+	{ 	
+		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
+		if(codProv==1){
+			
+		}else if(codProv==2){
+			
+		}else if(codProv==3){
+			
+		}
+	}
 	fclose(fp);
-	
 }
 
 int total(int num)
@@ -127,8 +145,8 @@ float promProv(int code, int med)
 
 	//en vez de leer el archivo acá debería recorrer la lista e ir sumando!
 	//bueno. Acá ya se me hizo un lío. Hasta no descifrar todo el comportamiento de la estructura, me voy a queddar tildada.
-	
-	return (0.01);*/
+	*/
+	return (0.01);
 
 }
 
