@@ -36,7 +36,7 @@ class Archivo{
 		FILE *file;
 	public:
 		Archivo();
-		void get(void);
+		void get(struct city*, struct city*, struct city*);
 };
 
 int total(int);

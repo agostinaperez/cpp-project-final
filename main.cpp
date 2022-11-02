@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
 	int op=0, cba_med=0, men_med=0, sf_med=0;
 	float tempcba=0, tempmen=0, tempsf=0;
 
-	archivo.get();
+	archivo.get(Cordoba, SF, Mendoza);
 	
 	
 	do{

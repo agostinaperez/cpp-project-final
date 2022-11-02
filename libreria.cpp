@@ -10,107 +10,97 @@ int menu()
 
 Archivo::Archivo()
 {	
-	FILE *fp;
-	fp=fopen("./data_set.txt","r");
+	file=fopen("./data_set.txt","r");
 	
-	if (fp==NULL){
+	if (file==NULL){
 		cout<<"Imposible abrir el archivo";
 		exit(1);
-	}else{
-		this->file=fp;
 	}
-	fclose(fp);
-	/*
-	while (!feof(fp))
-	{ 	
-		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
-		
+	delete(file);
 	
-		if (codProv == num)
-		{
-			newCity = new (city);
-			newCity->cityId = codCiud;
-			strcpy(newCity->cityName, nombre);
-			newCity->m.hum = hum;
-			newCity->m.temp = temp;
-			newCity->m.time.day = day;
-			newCity->m.time.month = month;
-			newCity->m.time.hh = hh;
-			newCity->m.time.mm = mm;
-			newCity->next = NULL;
-
-			cout<<num<<endl;
-			cout<<codProv<<endl;
-			cout<<newCity->m.temp<<endl;
-			cout<<newCity->cityName<<endl;
-			
-			if (head == NULL)
-			{
-				head = newCity;
-			}
-			else
-			{
-				copy = head;
-				while (copy == NULL)
-				{
-					copy = copy->next;
-				}
-				copy->next = newCity;
-			}
-			
-
-			*provincias[num-1]=newCity;
-			
-		}
-	} */
 	
 }
 
-void Archivo::get(){
+void Archivo::get(struct city* Cordoba, struct city* SF, struct city* Mendoza){
 	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
 	float hum = 0, temp = 0;
 	char nombre[50];
 	city *newCity = NULL, *copy=NULL, *head=NULL;
 	FILE *fp=NULL;
-	fp=fopen("./data_set.txt","r");
-	while (!feof(fp))
+	file=fopen("./data_set.txt","r");
+	while (!feof(file))
 	{ 	
 		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
-		if(codProv==1){
-			
-		}else if(codProv==2){
-			
-		}else if(codProv==3){
-			
-		}
-	}
-	fclose(fp);
-}
+		
+	if(codProv==1){
+			Cordoba->cityId=codCiud;
+			strcpy(Cordoba->cityName, nombre);
+			Cordoba->m.hum=hum;
+			Cordoba->m.temp=temp;
+			Cordoba->m.time.day=day;
+			Cordoba->m.time.month=month;
+			Cordoba->m.time.mm=mm;
+			Cordoba->m.time.hh=hh;
+			Cordoba->next=NULL;
 
-int total(int num)
-{	int cod=0, codP=0, cba=0, men=0, sf=0;
-	FILE *fp;
-	fp=fopen("./data_set.txt","r");
-	if (fp==NULL){
-		cout<<"Imposible abrir el archivo";
-		exit(1);
-	}
-
-	while (!feof(fp)){
-		fscanf(fp, "%d, %d", &cod, &codP);
-		if(codP==num && codP==1){
-			cba+=1;
-		}else{
-			if(codP==num && codP==2){
-				men+=1;
+			if(head==NULL){
+				head=Cordoba;
 			}else{
-				if(codP==num && codP==3){
-					sf+=1;
+				copy=head;
+				while (copy==NULL){
+					copy=copy->next;
+				}
+				copy->next=Cordoba;}
+	}else{
+		if(codProv==2){
+			Mendoza->cityId=codCiud;
+			strcpy(Mendoza->cityName, nombre);
+			Mendoza->m.hum=hum;
+			Mendoza->m.temp=temp;
+			Mendoza->m.time.day=day;
+			Mendoza->m.time.month=month;
+			Mendoza->m.time.mm=mm;
+			Mendoza->m.time.hh=hh;
+			Mendoza->next=NULL;
+
+			if(head==NULL){
+				head=Mendoza;
+			}else{
+				copy=head;
+				while (copy==NULL){
+					copy=copy->next;
+				}
+				copy->next=Mendoza;}
+		}else{
+			if(codProv==3){
+			SF->cityId=codCiud;
+			strcpy(SF->cityName, nombre);
+			SF->m.hum=hum;
+			SF->m.temp=temp;
+			SF->m.time.day=day;
+			SF->m.time.month=month;
+			SF->m.time.mm=mm;
+			SF->m.time.hh=hh;
+			SF->next=NULL;
+
+			if(head==NULL){
+				head=SF;
+			}else{
+				copy=head;
+				while (copy==NULL){
+					copy=copy->next;
+				}
+				copy->next=SF;}
 				}
 			}
 		}
-	}
-	fclose(fp);
+	fclose(file);
+}
+}
+
+int total(int num){	
+	int cod=0, codP=0, cba=0, men=0, sf=0;
+	
 
 	if (num==1){
 		cout<<"La cantidad de mediciones tomadas en Córdoba es de: "<<cba;
