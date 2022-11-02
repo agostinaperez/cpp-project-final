@@ -6,46 +6,50 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 using namespace std;
 int menu(void);
 
-struct timestamp{
+struct timestamp
+{
 	int day;
 	int month;
 	int hh;
 	int mm;
 };
 
-struct measurement{
+struct measurement
+{
 	struct timestamp time;
 	float temp;
 	float hum;
 };
 
-
-struct city{
+struct city
+{
 	struct city *next;
 	struct measurement m;
 	int cityId;
 	char cityName[50];
 };
 
-class Archivo{
-	private:
-		FILE *file;
-	public:
-		Archivo();
-		void get(struct city*, struct city*, struct city*);
+class Archivo
+{
+private:
+	FILE *file;
+
+public:
+	Archivo();
+	void get(struct city *, struct city *, struct city *);
 };
 
-int total(int);
-float promProv(int, int);
+int total(int, struct city *, struct city *, struct city *);
+
+float promProv(int, struct city *, struct city *, struct city *);
 void promCiud(void);
 void ciudadCalida(void);
 void ciudadFria(void);
 void diaFrio(void);
 void diaCalido(void);
-void plantarPimientos(void);
+void plantarPimientos(float, float, float, struct city *, struct city *, struct city *);
 
 #endif

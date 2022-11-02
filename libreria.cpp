@@ -9,137 +9,214 @@ int menu()
 }
 
 Archivo::Archivo()
-{	
-	file=fopen("./data_set.txt","r");
-	
-	if (file==NULL){
-		cout<<"Imposible abrir el archivo";
+{
+	file = fopen("./data_set.txt", "r");
+
+	if (file == NULL)
+	{
+		cout << "Imposible abrir el archivo";
 		exit(1);
 	}
-	delete(file);
-	
-	
+	fclose(file);
 }
 
-void Archivo::get(struct city* Cordoba, struct city* SF, struct city* Mendoza){
+void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
+{
 	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
 	float hum = 0, temp = 0;
 	char nombre[50];
-	city *newCity = NULL, *copy=NULL, *head=NULL;
-	FILE *fp=NULL;
-	file=fopen("./data_set.txt","r");
+	city *copy = NULL, *headC = NULL, *headSF = NULL, *headM = NULL;
+	FILE *fp = NULL;
+	file = fopen("./data_set.txt", "r");
 	while (!feof(file))
-	{ 	
-		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
-		
-	if(codProv==1){
-			Cordoba->cityId=codCiud;
+	{
+		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre[50], &temp, &hum, &hh, &mm, &day, &month);
+
+		if (codProv == 1)
+		{
+			Cordoba->cityId = codCiud;
 			strcpy(Cordoba->cityName, nombre);
-			Cordoba->m.hum=hum;
-			Cordoba->m.temp=temp;
-			Cordoba->m.time.day=day;
-			Cordoba->m.time.month=month;
-			Cordoba->m.time.mm=mm;
-			Cordoba->m.time.hh=hh;
-			Cordoba->next=NULL;
+			Cordoba->m.hum = hum;
+			Cordoba->m.temp = temp;
+			Cordoba->m.time.day = day;
+			Cordoba->m.time.month = month;
+			Cordoba->m.time.mm = mm;
+			Cordoba->m.time.hh = hh;
+			Cordoba->next = NULL;
 
-			if(head==NULL){
-				head=Cordoba;
-			}else{
-				copy=head;
-				while (copy==NULL){
-					copy=copy->next;
+			if (headC == NULL)
+			{
+				headC = Cordoba;
+			}
+			else
+			{
+				copy = headC;
+				while (copy == NULL)
+				{
+					copy = copy->next;
 				}
-				copy->next=Cordoba;}
-	}else{
-		if(codProv==2){
-			Mendoza->cityId=codCiud;
-			strcpy(Mendoza->cityName, nombre);
-			Mendoza->m.hum=hum;
-			Mendoza->m.temp=temp;
-			Mendoza->m.time.day=day;
-			Mendoza->m.time.month=month;
-			Mendoza->m.time.mm=mm;
-			Mendoza->m.time.hh=hh;
-			Mendoza->next=NULL;
+				copy->next = Cordoba;
+			}
+		}
+		else
+		{
+			if (codProv == 2)
+			{
+				Mendoza->cityId = codCiud;
+				strcpy(Mendoza->cityName, nombre);
+				Mendoza->m.hum = hum;
+				Mendoza->m.temp = temp;
+				Mendoza->m.time.day = day;
+				Mendoza->m.time.month = month;
+				Mendoza->m.time.mm = mm;
+				Mendoza->m.time.hh = hh;
+				Mendoza->next = NULL;
 
-			if(head==NULL){
-				head=Mendoza;
-			}else{
-				copy=head;
-				while (copy==NULL){
-					copy=copy->next;
+				if (headM == NULL)
+				{
+					headM = Mendoza;
 				}
-				copy->next=Mendoza;}
-		}else{
-			if(codProv==3){
-			SF->cityId=codCiud;
-			strcpy(SF->cityName, nombre);
-			SF->m.hum=hum;
-			SF->m.temp=temp;
-			SF->m.time.day=day;
-			SF->m.time.month=month;
-			SF->m.time.mm=mm;
-			SF->m.time.hh=hh;
-			SF->next=NULL;
+				else
+				{
+					copy = headM;
+					while (copy == NULL)
+					{
+						copy = copy->next;
+					}
+					copy->next = Mendoza;
+				}
+			}
+			else
+			{
+				if (codProv == 3)
+				{
+					SF->cityId = codCiud;
+					strcpy(SF->cityName, nombre);
+					SF->m.hum = hum;
+					SF->m.temp = temp;
+					SF->m.time.day = day;
+					SF->m.time.month = month;
+					SF->m.time.mm = mm;
+					SF->m.time.hh = hh;
+					SF->next = NULL;
 
-			if(head==NULL){
-				head=SF;
-			}else{
-				copy=head;
-				while (copy==NULL){
-					copy=copy->next;
-				}
-				copy->next=SF;}
+					if (headSF == NULL)
+					{
+						headSF = SF;
+					}
+					else
+					{
+						copy = headSF;
+						while (copy == NULL)
+						{
+							copy = copy->next;
+						}
+						copy->next = SF;
+					}
 				}
 			}
 		}
-	fclose(file);
-}
+		fclose(file);
+		delete (copy);
+	}
 }
 
-int total(int num){	
-	int cod=0, codP=0, cba=0, men=0, sf=0;
-	
+int total(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
+{
+	int cba = 0, men = 0, sf = 0;
+	city *copy = NULL, *headC = Cordoba, *headSF = SF, *headM = Mendoza;
 
-	if (num==1){
-		cout<<"La cantidad de mediciones tomadas en Córdoba es de: "<<cba;
+	if (num == 1)
+	{
+		copy = headC;
+		while (copy != NULL)
+		{
+			cba += 1;
+			copy = copy->next;
+		}
+
+		cout << "La cantidad de mediciones tomadas en Córdoba es de: " << cba;
 		return cba;
-	}else{
-		if(num==2){
-			cout<<"La cantidad de mediciones tomadas en Mendoza es de: "<<men;
+	}
+	else
+	{
+		if (num == 2)
+		{
+			copy = headM;
+			while (copy != NULL)
+			{
+				men += 1;
+				copy = copy->next;
+			}
+
+			cout << "La cantidad de mediciones tomadas en Mendoza es de: " << men;
 			return men;
-		}else{
-			cout<<"La cantidad de mediciones tomadas en Santa Fe es de: "<<sf;
+		}
+		else
+		{
+			copy = headSF;
+			while (copy != NULL)
+			{
+				sf += 1;
+				copy = copy->next;
+			}
+
+			cout << "La cantidad de mediciones tomadas en Santa Fe es de: " << sf;
 			return sf;
 		}
 	}
-
 }
 
 void promCiud()
 {
 }
 
-float promProv(int code, int med)
-{	/*city *head=NULL, *copy=NULL;
-	head=&ciudades; //???????
-	
-	float temp=0, promcba=0, prommen=0, promsf=0;
-	char name;
-	int codciud=0, codprov=0;
-	
-	if (med==0){
-	med=this->total(code);
+float promProv(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
+{
+	city *headC = Cordoba, *headSF = SF, *headM = Mendoza, *copy = NULL;
+	int contador = 0;
+	float temp = 0, promcba = 0, prommen = 0, promsf = 0;
+
+	if (num == 1)
+	{
+		copy = headC;
+		while (copy != NULL)
+		{
+			temp += Cordoba->m.temp;
+			contador += 1;
+			copy = copy->next;
+		}
+		promcba = temp / contador;
+		return promcba;
 	}
-
-	//en vez de leer el archivo acá debería recorrer la lista e ir sumando!
-	//bueno. Acá ya se me hizo un lío. Hasta no descifrar todo el comportamiento de la estructura, me voy a queddar tildada.
-	*/
-	return (0.01);
-
+	else
+	{
+		if (num == 2)
+		{
+			copy = headM;
+			while (copy != NULL)
+			{
+				temp += Mendoza->m.temp;
+				contador += 1;
+				copy = copy->next;
+			}
+			prommen = temp / contador;
+			return prommen;
+		}
+		else
+		{
+			copy = headSF;
+			while (copy != NULL)
+			{
+				temp += SF->m.temp;
+				contador += 1;
+				copy = copy->next;
+			}
+			promsf = temp / contador;
+			return promsf;
+		}
+	}
 }
-
 
 void ciudadCalida()
 {
@@ -157,6 +234,18 @@ void diaFrio()
 {
 }
 
-void plantarPimientos()
-{
+void plantarPimientos(float tempcba, float tempmen, float tempsf,struct city *Cordoba, struct city *SF, struct city *Mendoza )
+{			
+	if(tempcba==0){
+		tempcba = promProv(1, Cordoba, SF, Mendoza);
+	}
+	if(tempmen==0){
+		tempmen = promProv(2, Cordoba, SF, Mendoza);
+	}if(tempsf==0){
+		tempsf = promProv(3, Cordoba, SF, Mendoza);
+	}
+
+	//acá tendría q 
+
+
 }
