@@ -117,7 +117,7 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			}
 		}
 		fclose(file);
-		delete (copy);
+		free(copy);
 	}
 }
 
@@ -165,6 +165,7 @@ int total(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			return sf;
 		}
 	}
+	free(copy);
 }
 
 void promCiud()
@@ -216,36 +217,223 @@ float promProv(int num, struct city *Cordoba, struct city *SF, struct city *Mend
 			return promsf;
 		}
 	}
+
+	free(copy);
 }
 
-void ciudadCalida()
+void ciudadCalida(struct city *Cordoba, struct city *SF, struct city *Mendoza)
+{	city *copy=NULL;
+	string cCor, cSF, cMen;
+	float mayor=-100;
+	copy=Cordoba;
+	while (copy != NULL)
+		{	if((copy->m.temp)>mayor){
+			cCor=copy->cityName;
+			mayor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"La ciudad más cálida de Córdoba es "<<cCor<<endl;
+
+	mayor=-100;
+	copy=Mendoza;
+	while (copy != NULL)
+		{	if((copy->m.temp)>mayor){
+			cMen=copy->cityName;
+			mayor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"La ciudad más cálida de Mendoza es "<<cMen<<endl;
+
+	mayor=-100;
+	copy=SF;
+	while (copy != NULL)
+		{	if((copy->m.temp)>mayor){
+			cSF=copy->cityName;
+			mayor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"La ciudad más cálida de Santa Fe es "<<cSF<<endl;
+
+	free(copy);
+}
+
+void ciudadFria(struct city *Cordoba, struct city *SF, struct city *Mendoza)
+{	city *copy=NULL;
+	string fCor, fSF, fMen;
+	float menor=100;
+	copy=Cordoba;
+	while (copy != NULL)
+		{	if((copy->m.temp)<menor){
+			fCor=copy->cityName;
+			menor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"La ciudad más fría de Córdoba es "<<fCor<<endl;
+
+	menor=100;
+	copy=Mendoza;
+	while (copy != NULL)
+		{	if((copy->m.temp)<menor){
+			fMen=copy->cityName;
+			menor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"La ciudad más fría de Mendoza es "<<fMen<<endl;
+
+	menor=100;
+	copy=SF;
+	while (copy != NULL)
+		{	if((copy->m.temp)<menor){
+			fSF=copy->cityName;
+			menor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"La ciudad más fría de Santa Fe es "<<fSF<<endl;
+
+	free(copy);
+}
+
+void diaCalido(struct city *Cordoba, struct city *SF, struct city *Mendoza)
+{	city *copy=NULL;
+	int dia=0, mes=0;
+	float mayor=-100;
+	copy=Cordoba;
+	while (copy != NULL)
+		{	if((copy->m.temp)>mayor){
+			dia=copy->m.time.day;
+			mes=copy->m.time.month;
+			mayor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"El día más cálido de Córdoba fue el "<<dia<<"/"<<mes<<endl;
+
+	mayor=-100;
+	copy=Mendoza;
+	while (copy != NULL)
+		{	if((copy->m.temp)>mayor){
+			dia=copy->m.time.day;
+			mes=copy->m.time.month;
+			mayor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"El día más cálido de Mendoza fue el "<<dia<<"/"<<mes<<endl;
+
+	mayor=-100;
+	copy=SF;
+	while (copy != NULL)
+		{	if((copy->m.temp)>mayor){
+			dia=copy->m.time.day;
+			mes=copy->m.time.month;
+			mayor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"El día más cálido de Santa Fe fue el "<<dia<<"/"<<mes<<endl;
+
+	free(copy);
+}
+
+void diaFrio(struct city *Cordoba, struct city *SF, struct city *Mendoza)
+{	city *copy=NULL;
+	int dia=0, mes=0;
+	float menor=100;
+	copy=Cordoba;
+	while (copy != NULL)
+		{	if((copy->m.temp)<menor){
+			dia=copy->m.time.day;
+			mes=copy->m.time.month;
+			menor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"El día más frío de Córdoba fue el "<<dia<<"/"<<mes<<endl;
+
+	menor=100;
+	copy=Mendoza;
+	while (copy != NULL)
+		{	if((copy->m.temp)<menor){
+			dia=copy->m.time.day;
+			mes=copy->m.time.month;
+			menor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"El día más frío de Mendoza fue el "<<dia<<"/"<<mes<<endl;
+
+	menor=100;
+	copy=SF;
+	while (copy != NULL)
+		{	if((copy->m.temp)<menor){
+			dia=copy->m.time.day;
+			mes=copy->m.time.month;
+			menor=copy->m.temp;
+		}	
+			copy = copy->next;
+		}
+
+	cout<<"El día más frío de Santa Fe fue el "<<dia<<"/"<<mes<<endl;
+
+	free(copy);
+}
+
+void plantarPimientos(float tempcba, float tempmen, float tempsf, struct city *Cordoba, struct city *SF, struct city *Mendoza)
 {
-}
+	float cba = 0, sf = 0, men = 0;
 
-void ciudadFria()
-{
-}
-
-void diaCalido()
-{
-}
-
-void diaFrio()
-{
-}
-
-void plantarPimientos(float tempcba, float tempmen, float tempsf,struct city *Cordoba, struct city *SF, struct city *Mendoza )
-{			
-	if(tempcba==0){
+	if (tempcba == 0)
+	{
 		tempcba = promProv(1, Cordoba, SF, Mendoza);
 	}
-	if(tempmen==0){
+	if (tempmen == 0)
+	{
 		tempmen = promProv(2, Cordoba, SF, Mendoza);
-	}if(tempsf==0){
+	}
+	if (tempsf == 0)
+	{
 		tempsf = promProv(3, Cordoba, SF, Mendoza);
 	}
 
-	//acá tendría q 
+	cba = abs(tempcba - 23);
 
+	sf = abs(tempsf - 23);
 
+	men = abs(tempmen - 23);
+
+	if (cba < men && cba < sf)
+	{
+		cout << "La mejor provincia para plantar pimientos es Córdoba";
+	}
+	else
+	{
+		if (men < cba && men < sf)
+		{
+			cout << "La mejor provincia para plantar pimientos es Mendoza";
+		}
+		else
+		{
+			if (sf < cba && sf < men)
+			{
+				cout << "La mejor provincia para plantar pimientos es Córdoba";
+			}
+		}
+	}
 }

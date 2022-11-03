@@ -34,16 +34,16 @@ int main(int argc, char *argv[])
 
 			break;
 		case 4:
-
+			ciudadCalida(Cordoba, SF, Mendoza);
 			break;
 		case 5:
-
+			ciudadFria(Cordoba, SF, Mendoza);
 			break;
 		case 6:
-
+			diaFrio(Cordoba, SF, Mendoza);
 			break;
 		case 7:
-
+			diaCalido(Cordoba, SF, Mendoza);
 			break;
 		case 8:
 			plantarPimientos(tempcba, tempmen, tempsf, Cordoba, SF, Mendoza);

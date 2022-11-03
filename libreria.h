@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include <stdlib.h>
+#include <cmath>
 #include <stdio.h>
 
 using namespace std;
@@ -46,10 +47,10 @@ int total(int, struct city *, struct city *, struct city *);
 
 float promProv(int, struct city *, struct city *, struct city *);
 void promCiud(void);
-void ciudadCalida(void);
-void ciudadFria(void);
-void diaFrio(void);
-void diaCalido(void);
+void ciudadCalida(struct city *, struct city *, struct city *);
+void ciudadFria(struct city *, struct city *, struct city *);
+void diaFrio(struct city *, struct city *, struct city *);
+void diaCalido(struct city *, struct city *, struct city *);
 void plantarPimientos(float, float, float, struct city *, struct city *, struct city *);
 
 #endif
