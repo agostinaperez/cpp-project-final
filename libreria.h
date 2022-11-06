@@ -44,9 +44,8 @@ public:
 };
 
 int total(int, struct city *, struct city *, struct city *);
-
 float promProv(int, struct city *, struct city *, struct city *);
-void promCiud(void);
+void promCiud(struct city *, struct city *, struct city *);
 void ciudadCalida(struct city *, struct city *, struct city *);
 void ciudadFria(struct city *, struct city *, struct city *);
 void diaFrio(struct city *, struct city *, struct city *);

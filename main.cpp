@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 			tempsf = promProv(3, Cordoba, SF, Mendoza);
 			break;
 		case 3:
-
+			promCiud(Cordoba, SF, Mendoza);
 			break;
 		case 4:
 			ciudadCalida(Cordoba, SF, Mendoza);

@@ -168,8 +168,69 @@ int total(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
 	free(copy);
 }
 
-void promCiud()
-{
+void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
+{	int ciudades=0, i=0, acumulador=0, cant=0;
+	
+	city *copy=NULL;
+	int cod_ciud=0;
+	copy=Cordoba;
+
+	while (copy != NULL)
+	{
+		cod_ciud=copy->cityId;
+		if (cod_ciud==ciudades){
+			acumulador+=copy->m.temp;
+			cant+=1;
+
+		}
+		else{
+			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<(acumulador/cant);
+			ciudades+=1;
+		}
+
+		copy = copy->next;
+	}
+	
+	copy=Mendoza;
+	ciudades=0;
+	cant=0;
+	acumulador=0;
+	while (copy != NULL)
+	{
+		cod_ciud=copy->cityId;
+		if (cod_ciud==ciudades){
+			acumulador+=copy->m.temp;
+			cant+=1;
+
+		}
+		else{
+			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<(acumulador/cant);
+			ciudades+=1;
+		}
+
+		copy = copy->next;
+	}
+
+	copy=SF;
+
+	while (copy != NULL)
+	{
+		cod_ciud=copy->cityId;
+		if (cod_ciud==ciudades){
+			acumulador+=copy->m.temp;
+			cant+=1;
+
+		}
+		else{
+			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<(acumulador/cant);
+			ciudades+=1;
+		}
+
+		copy = copy->next;
+	}
+
+
+
 }
 
 float promProv(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
