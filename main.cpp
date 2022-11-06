@@ -5,19 +5,23 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-
+	//Creación de listas enlazadas
 	city *Cordoba = NULL, *SF = NULL, *Mendoza = NULL;
 
+	//instanciando el objeto
 	Archivo archivo;
 
 	int op = 0, cba_med = 0, men_med = 0, sf_med = 0;
 	float tempcba = 0, tempmen = 0, tempsf = 0;
 
+	//carga de datos a las listas
 	archivo.get(Cordoba, SF, Mendoza);
 
 	do
-	{
+	{	//Menú de opciones
 		op = menu();
+
+		//Implementación de las funciones
 		switch (op)
 		{
 		case 1:

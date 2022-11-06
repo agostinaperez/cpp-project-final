@@ -8,6 +8,7 @@ int menu()
 	return op;
 }
 
+//constructor
 Archivo::Archivo()
 {
 	file = fopen("./data_set.txt", "r");
@@ -25,13 +26,18 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
 	float hum = 0, temp = 0;
 	char nombre[50];
-	city *copy = NULL, *headC = NULL, *headSF = NULL, *headM = NULL;
-	FILE *fp = NULL;
-	file = fopen("./data_set.txt", "r");
-	while (!feof(file))
-	{
-		fscanf(fp, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre[50], &temp, &hum, &hh, &mm, &day, &month);
 
+	//creación de listas complementarias (copy, y los heads)
+	city *copy = NULL, *headC = NULL, *headSF = NULL, *headM = NULL;
+	file = fopen("./data_set.txt", "r");
+
+	//recorrido del archivo
+	while (!feof(file))
+	{	//lectura de datos
+		fscanf(file, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre[50], &temp, &hum, &hh, &mm, &day, &month);
+
+		/*este if se hace para cargar cada medición en su correspondiente
+		provincia, según su código de provincia*/
 		if (codProv == 1)
 		{
 			Cordoba->cityId = codCiud;
@@ -117,7 +123,11 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			}
 		}
 		fclose(file);
+		//liberar memoria
 		free(copy);
+		free(headC);
+		free(headM);
+		free(headSF);
 	}
 }
 
