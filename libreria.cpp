@@ -202,7 +202,7 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 	}
 	
 	copy=Mendoza;
-	ciudades=0;
+	ciudades=77;
 	cant=0;
 	acumulador=0;
 	while (copy != NULL)
@@ -222,7 +222,9 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 	}
 
 	copy=SF;
-
+	ciudades=24;
+	cant=0;
+	acumulador=0;
 	while (copy != NULL)
 	{
 		cod_ciud=copy->cityId;
