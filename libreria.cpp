@@ -38,7 +38,7 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 
 		/*este if se hace para cargar cada medición en su correspondiente
 		provincia, según su código de provincia*/
-		if (codProv == 1)
+		if (codProv == 3)
 		{
 			Cordoba->cityId = codCiud;
 			strcpy(Cordoba->cityName, nombre);
@@ -66,7 +66,7 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 		}
 		else
 		{
-			if (codProv == 2)
+			if (codProv == 1)
 			{
 				Mendoza->cityId = codCiud;
 				strcpy(Mendoza->cityName, nombre);
@@ -94,7 +94,7 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			}
 			else
 			{
-				if (codProv == 3)
+				if (codProv == 2)
 				{
 					SF->cityId = codCiud;
 					strcpy(SF->cityName, nombre);
@@ -136,7 +136,7 @@ int total(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
 	int cba = 0, men = 0, sf = 0;
 	city *copy = NULL, *headC = Cordoba, *headSF = SF, *headM = Mendoza;
 
-	if (num == 1)
+	if (num == 3)
 	{
 		copy = headC;
 		while (copy != NULL)
@@ -150,7 +150,7 @@ int total(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
 	}
 	else
 	{
-		if (num == 2)
+		if (num == 1)
 		{
 			copy = headM;
 			while (copy != NULL)
@@ -251,7 +251,7 @@ float promProv(int num, struct city *Cordoba, struct city *SF, struct city *Mend
 	int contador = 0;
 	float temp = 0, promcba = 0, prommen = 0, promsf = 0;
 
-	if (num == 1)
+	if (num == 3)
 	{
 		copy = headC;
 		while (copy != NULL)
@@ -265,7 +265,7 @@ float promProv(int num, struct city *Cordoba, struct city *SF, struct city *Mend
 	}
 	else
 	{
-		if (num == 2)
+		if (num == 1)
 		{
 			copy = headM;
 			while (copy != NULL)
