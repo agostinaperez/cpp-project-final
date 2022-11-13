@@ -7,6 +7,9 @@ int main(int argc, char *argv[])
 {
 	//Creación de listas enlazadas
 	city *Cordoba = NULL, *SF = NULL, *Mendoza = NULL;
+	Cordoba=new(city);
+	SF=new(city);
+	Mendoza=new(city);
 
 	//instanciando el objeto
 	Archivo archivo;
@@ -15,7 +18,8 @@ int main(int argc, char *argv[])
 	float tempcba = 0, tempmen = 0, tempsf = 0;
 
 	//carga de datos a las listas
-	archivo.get(Cordoba, SF, Mendoza);
+	
+	archivo.get(&Cordoba, &SF, &Mendoza);
 
 	do
 	{	//Menú de opciones

@@ -21,38 +21,40 @@ Archivo::Archivo()
 	fclose(file);
 }
 
-void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
+void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mendoza)
 {
 	int codProv = 0, codCiud = 0, hh = 0, mm = 0, month = 0, day = 0;
 	float hum = 0, temp = 0;
 	char nombre[50];
 
 	//creación de listas complementarias (copy, y los heads)
-	city *copy = NULL, *headC = NULL, *headSF = NULL, *headM = NULL;
+	city *copy = NULL, *headC = NULL, *headSF = NULL, *headM = NULL, *newNode=NULL;
 	file = fopen("./data_set.txt", "r");
 
 	//recorrido del archivo
-	while (!feof(file))
-	{	//lectura de datos
+	while (!feof(file)){	
+		newNode=new(city);
+		//lectura de datos
 		fscanf(file, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre[50], &temp, &hum, &hh, &mm, &day, &month);
 
 		/*este if se hace para cargar cada medición en su correspondiente
 		provincia, según su código de provincia*/
 		if (codProv == 3)
-		{
-			Cordoba->cityId = codCiud;
-			strcpy(Cordoba->cityName, nombre);
-			Cordoba->m.hum = hum;
-			Cordoba->m.temp = temp;
-			Cordoba->m.time.day = day;
-			Cordoba->m.time.month = month;
-			Cordoba->m.time.mm = mm;
-			Cordoba->m.time.hh = hh;
-			Cordoba->next = NULL;
+		{	
+			newNode->cityId = codCiud;
+			strcpy(newNode->cityName, nombre);
+			newNode->m.hum = hum;
+			newNode->m.temp = temp;
+			newNode->m.time.day = day;
+			newNode->m.time.month = month;
+			newNode->m.time.mm = mm;
+			newNode->m.time.hh = hh;
+			newNode->next = NULL;
+			*Cordoba=newNode;
 
 			if (headC == NULL)
 			{
-				headC = Cordoba;
+				headC = *Cordoba;
 			}
 			else
 			{
@@ -61,26 +63,27 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 				{
 					copy = copy->next;
 				}
-				copy->next = Cordoba;
+				copy->next = *Cordoba;
 			}
 		}
 		else
 		{
 			if (codProv == 1)
 			{
-				Mendoza->cityId = codCiud;
-				strcpy(Mendoza->cityName, nombre);
-				Mendoza->m.hum = hum;
-				Mendoza->m.temp = temp;
-				Mendoza->m.time.day = day;
-				Mendoza->m.time.month = month;
-				Mendoza->m.time.mm = mm;
-				Mendoza->m.time.hh = hh;
-				Mendoza->next = NULL;
+				newNode->cityId = codCiud;
+				strcpy(newNode->cityName, nombre);
+				newNode->m.hum = hum;
+				newNode->m.temp = temp;
+				newNode->m.time.day = day;
+				newNode->m.time.month = month;
+				newNode->m.time.mm = mm;
+				newNode->m.time.hh = hh;
+				newNode->next = NULL;
+				*Mendoza=newNode;
 
 				if (headM == NULL)
 				{
-					headM = Mendoza;
+					headM = *Mendoza;
 				}
 				else
 				{
@@ -89,26 +92,27 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 					{
 						copy = copy->next;
 					}
-					copy->next = Mendoza;
+					copy->next = *Mendoza;
 				}
 			}
 			else
 			{
 				if (codProv == 2)
 				{
-					SF->cityId = codCiud;
-					strcpy(SF->cityName, nombre);
-					SF->m.hum = hum;
-					SF->m.temp = temp;
-					SF->m.time.day = day;
-					SF->m.time.month = month;
-					SF->m.time.mm = mm;
-					SF->m.time.hh = hh;
-					SF->next = NULL;
+					newNode->cityId = codCiud;
+					strcpy(newNode->cityName, nombre);
+					newNode->m.hum = hum;
+					newNode->m.temp = temp;
+					newNode->m.time.day = day;
+					newNode->m.time.month = month;
+					newNode->m.time.mm = mm;
+					newNode->m.time.hh = hh;
+					newNode->next = NULL;
+					*SF=newNode;
 
 					if (headSF == NULL)
 					{
-						headSF = SF;
+						headSF = *SF;
 					}
 					else
 					{
@@ -117,7 +121,7 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 						{
 							copy = copy->next;
 						}
-						copy->next = SF;
+						copy->next = *SF;
 					}
 				}
 			}
@@ -125,9 +129,6 @@ void Archivo::get(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 		fclose(file);
 		//liberar memoria
 		free(copy);
-		free(headC);
-		free(headM);
-		free(headSF);
 	}
 }
 

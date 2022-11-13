@@ -40,7 +40,7 @@ private:
 
 public:
 	Archivo();
-	void get(struct city *, struct city *, struct city *);
+	void get(struct city **, struct city **, struct city **);
 };
 
 int total(int, struct city *, struct city *, struct city *);
