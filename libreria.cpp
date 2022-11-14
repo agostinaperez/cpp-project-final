@@ -3,7 +3,7 @@
 int menu()
 {
 	int op;
-	cout << "Ingrese una opci�n: \n 1. Total de las muestras almacenadas en las listas pertenecientes a cada provincia\n 2. Temperatura promedio de cada provincia\n 3.Temperatura promedio de cada ciudad\n 4.Ciudad m?s c?lida de cada provincia\n 5. Ciudad mas fr?a de cada provincia\n 6. D?a m?s fr?o de cada provincia\n 7. D?a m?s c?lido de cada ciudad\n 8. Mejor provincia para el cultivo de pimientos (temperatura promedio cercana a 23 grados cent?grados)\n 0.Salir" << endl;
+	cout << "Ingrese una opcion: \n 1. Total de las muestras almacenadas en las listas pertenecientes a cada provincia\n 2. Temperatura promedio de cada provincia\n 3.Temperatura promedio de cada ciudad\n 4.Ciudad mas calida de cada provincia\n 5. Ciudad mas fria de cada provincia\n 6. Dia mas frio de cada provincia\n 7. Dia mas calido de cada ciudad\n 8. Mejor provincia para el cultivo de pimientos (temperatura promedio cercana a 23 grados centigrados)\n 0.Salir" << endl;
 	cin >> op;
 	return op;
 }
@@ -34,8 +34,13 @@ void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mend
 	//recorrido del archivo
 	while (!feof(file)){	
 		newNode=new(city);
+		if(newNode==NULL){
+			cout<<"No hay suficiente espacio de memoria";
+			exit(1);
+		}
+		
 		//lectura de datos
-		fscanf(file, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre[50], &temp, &hum, &hh, &mm, &day, &month);
+		fscanf(file, "%d\t%d\t%s\t%f\t%f\t%d\t%d\t%d\t%d", &codCiud, &codProv, &nombre, &temp, &hum, &hh, &mm, &day, &month);
 
 		/*este if se hace para cargar cada medición en su correspondiente
 		provincia, según su código de provincia*/
@@ -126,53 +131,57 @@ void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mend
 				}
 			}
 		}
-		fclose(file);
-		//liberar memoria
-		free(copy);
+		
 	}
+	fclose(file);
+	//liberar memoria
+	free(copy);
 }
 
-int total(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
+int total(int num, struct city **Cordoba, struct city **SF, struct city **Mendoza)
 {
+	
+	//no s� por qu� no me funciona esto
 	int cba = 0, men = 0, sf = 0;
-	city *copy = NULL, *headC = Cordoba, *headSF = SF, *headM = Mendoza;
+	city *copy = NULL;	
+	
+	
 
 	if (num == 3)
 	{
-		copy = headC;
-		while (copy != NULL)
-		{
-			cba += 1;
+		copy = *Cordoba;
+		while (copy != NULL){
+			cba =cba+ 1;
 			copy = copy->next;
 		}
 
-		cout << "La cantidad de mediciones tomadas en Córdoba es de: " << cba;
+		cout << "La cantidad de mediciones tomadas en Cordoba es de: " << cba<<endl;
 		return cba;
 	}
 	else
 	{
 		if (num == 1)
 		{
-			copy = headM;
+			copy = *Mendoza;
 			while (copy != NULL)
 			{
-				men += 1;
+				men =men+ 1;
 				copy = copy->next;
 			}
 
-			cout << "La cantidad de mediciones tomadas en Mendoza es de: " << men;
+			cout << "La cantidad de mediciones tomadas en Mendoza es de: " << men<<endl;
 			return men;
 		}
 		else
 		{
-			copy = headSF;
+			copy = *SF;
 			while (copy != NULL)
 			{
-				sf += 1;
+				sf =sf+ 1;
 				copy = copy->next;
 			}
 
-			cout << "La cantidad de mediciones tomadas en Santa Fe es de: " << sf;
+			cout << "La cantidad de mediciones tomadas en Santa Fe es de: " << sf<<endl;
 			return sf;
 		}
 	}
@@ -180,7 +189,8 @@ int total(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
 }
 
 void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
-{	int ciudades=0, i=0, acumulador=0, cant=0;
+{	int ciudades=0, i=0;
+	float acumulador=0, cant=0, t=0;
 	
 	city *copy=NULL;
 	int cod_ciud=0;
@@ -195,7 +205,8 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 
 		}
 		else{
-			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<(acumulador/cant);
+			t=acumulador/cant;
+			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<t<<endl;
 			ciudades+=1;
 		}
 
@@ -210,12 +221,13 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 	{
 		cod_ciud=copy->cityId;
 		if (cod_ciud==ciudades){
-			acumulador+=copy->m.temp;
+			acumulador=acumulador+copy->m.temp;
 			cant+=1;
 
 		}
 		else{
-			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<(acumulador/cant);
+			t=acumulador/cant;
+			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<t<<endl;
 			ciudades+=1;
 		}
 
@@ -235,7 +247,8 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 
 		}
 		else{
-			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<(acumulador/cant);
+			t=acumulador/cant;
+			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<t<<endl;
 			ciudades+=1;
 		}
 
@@ -308,7 +321,7 @@ void ciudadCalida(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"La ciudad más cálida de Córdoba es "<<cCor<<endl;
+	cout<<"La ciudad mas calida de Cordoba es "<<cCor<<endl;
 
 	mayor=-100;
 	copy=Mendoza;
@@ -320,7 +333,7 @@ void ciudadCalida(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"La ciudad más cálida de Mendoza es "<<cMen<<endl;
+	cout<<"La ciudad mas calida de Mendoza es "<<cMen<<endl;
 
 	mayor=-100;
 	copy=SF;
@@ -332,7 +345,7 @@ void ciudadCalida(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"La ciudad más cálida de Santa Fe es "<<cSF<<endl;
+	cout<<"La ciudad mas calida de Santa Fe es "<<cSF<<endl;
 
 	free(copy);
 }
@@ -350,7 +363,7 @@ void ciudadFria(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"La ciudad más fría de Córdoba es "<<fCor<<endl;
+	cout<<"La ciudad mas fri�a de Cordoba es "<<fCor<<endl;
 
 	menor=100;
 	copy=Mendoza;
@@ -362,7 +375,7 @@ void ciudadFria(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"La ciudad más fría de Mendoza es "<<fMen<<endl;
+	cout<<"La ciudad mas fri�a de Mendoza es "<<fMen<<endl;
 
 	menor=100;
 	copy=SF;
@@ -374,7 +387,7 @@ void ciudadFria(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"La ciudad más fría de Santa Fe es "<<fSF<<endl;
+	cout<<"La ciudad mas fri�a de Santa Fe es "<<fSF<<endl;
 
 	free(copy);
 }
@@ -393,7 +406,7 @@ void diaCalido(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"El día más cálido de Córdoba fue el "<<dia<<"/"<<mes<<endl;
+	cout<<"El dia mas calido de Cordoba fue el "<<dia<<"/"<<mes<<endl;
 
 	mayor=-100;
 	copy=Mendoza;
@@ -406,7 +419,7 @@ void diaCalido(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"El día más cálido de Mendoza fue el "<<dia<<"/"<<mes<<endl;
+	cout<<"El dia mas calido de Mendoza fue el "<<dia<<"/"<<mes<<endl;
 
 	mayor=-100;
 	copy=SF;
@@ -419,7 +432,7 @@ void diaCalido(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"El día más cálido de Santa Fe fue el "<<dia<<"/"<<mes<<endl;
+	cout<<"El dia mas calido de Santa Fe fue el "<<dia<<"/"<<mes<<endl;
 
 	free(copy);
 }
@@ -438,7 +451,7 @@ void diaFrio(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"El día más frío de Córdoba fue el "<<dia<<"/"<<mes<<endl;
+	cout<<"El dia mas fri�o de Cordoba fue el "<<dia<<"/"<<mes<<endl;
 
 	menor=100;
 	copy=Mendoza;
@@ -451,7 +464,7 @@ void diaFrio(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"El día más frío de Mendoza fue el "<<dia<<"/"<<mes<<endl;
+	cout<<"El dia mas fri�o de Mendoza fue el "<<dia<<"/"<<mes<<endl;
 
 	menor=100;
 	copy=SF;
@@ -464,7 +477,7 @@ void diaFrio(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"El día más frío de Santa Fe fue el "<<dia<<"/"<<mes<<endl;
+	cout<<"El dia mas fri�o de Santa Fe fue el "<<dia<<"/"<<mes<<endl;
 
 	free(copy);
 }
@@ -494,19 +507,19 @@ void plantarPimientos(float tempcba, float tempmen, float tempsf, struct city *C
 
 	if (cba < men && cba < sf)
 	{
-		cout << "La mejor provincia para plantar pimientos es Córdoba";
+		cout << "La mejor provincia para plantar pimientos es Cordoba"<<endl;
 	}
 	else
 	{
 		if (men < cba && men < sf)
 		{
-			cout << "La mejor provincia para plantar pimientos es Mendoza";
+			cout << "La mejor provincia para plantar pimientos es Mendoza"<<endl;
 		}
 		else
 		{
 			if (sf < cba && sf < men)
 			{
-				cout << "La mejor provincia para plantar pimientos es Córdoba";
+				cout << "La mejor provincia para plantar pimientos es Santa Fe"<<endl;
 			}
 		}
 	}

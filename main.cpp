@@ -29,14 +29,15 @@ int main(int argc, char *argv[])
 		switch (op)
 		{
 		case 1:
-			cba_med = total(1, Cordoba, SF, Mendoza);
-			men_med = total(2, Cordoba, SF, Mendoza);
-			sf_med = total(3, Cordoba, SF, Mendoza);
+			men_med = total(1, &Cordoba, &SF, &Mendoza);
+			sf_med = total(2, &Cordoba, &SF, &Mendoza);
+			cba_med = total(3, &Cordoba, &SF, &Mendoza);
 			break;
 		case 2:
-			tempcba = promProv(1, Cordoba, SF, Mendoza);
-			tempmen = promProv(2, Cordoba, SF, Mendoza);
-			tempsf = promProv(3, Cordoba, SF, Mendoza);
+			tempmen = promProv(1, Cordoba, SF, Mendoza);
+			tempsf = promProv(2, Cordoba, SF, Mendoza);
+			tempcba = promProv(3, Cordoba, SF, Mendoza);
+			cout<<"La temperatura promedio de Mendoza es de "<<tempmen<<" grados, la de Santa Fe es de "<<tempsf<<", y la de Cordoba es de "<<tempcba<<endl;
 			break;
 		case 3:
 			promCiud(Cordoba, SF, Mendoza);

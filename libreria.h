@@ -43,7 +43,7 @@ public:
 	void get(struct city **, struct city **, struct city **);
 };
 
-int total(int, struct city *, struct city *, struct city *);
+int total(int, struct city **, struct city **, struct city **);
 float promProv(int, struct city *, struct city *, struct city *);
 void promCiud(struct city *, struct city *, struct city *);
 void ciudadCalida(struct city *, struct city *, struct city *);
