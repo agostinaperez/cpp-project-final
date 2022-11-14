@@ -134,8 +134,7 @@ void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mend
 	
 	
 	fclose(file);
-	//liberar memoria
-	free(copy);
+	
 }
 
 
@@ -184,8 +183,8 @@ void total(int num, struct city **Cordoba, struct city **SF, struct city **Mendo
 			cout << "La cantidad de mediciones tomadas en Santa Fe es de: " << sf<<endl;
 		}
 	}
-	
 	free(copy);
+	
 }
 
 void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
@@ -205,7 +204,7 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 
 		}
 		else{
-			t=acumulador/cant;
+			t=(acumulador/cant);
 			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<t<<endl;
 			ciudades+=1;
 		}
@@ -255,57 +254,60 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 		copy = copy->next;
 	}
 
+	free(copy);
 
 
 }
 
 float promProv(int num, struct city *Cordoba, struct city *SF, struct city *Mendoza)
 {
-	city *headC = Cordoba, *headSF = SF, *headM = Mendoza, *copy = NULL;
+	city *copy = NULL;
 	int contador = 0;
 	float temp = 0, promcba = 0, prommen = 0, promsf = 0;
 
 	if (num == 3)
 	{
-		copy = headC;
+		copy = Cordoba;
 		while (copy != NULL)
 		{
-			temp += Cordoba->m.temp;
+			temp += copy->m.temp;
 			contador += 1;
 			copy = copy->next;
 		}
 		promcba = temp / contador;
+		free(copy);
 		return promcba;
 	}
 	else
 	{
 		if (num == 1)
 		{
-			copy = headM;
+			copy = Mendoza;
 			while (copy != NULL)
 			{
-				temp += Mendoza->m.temp;
+				temp += copy->m.temp;
 				contador += 1;
 				copy = copy->next;
 			}
 			prommen = temp / contador;
+			free(copy);
 			return prommen;
 		}
 		else
 		{
-			copy = headSF;
+			copy = SF;
 			while (copy != NULL)
 			{
-				temp += SF->m.temp;
+				temp += copy->m.temp;
 				contador += 1;
 				copy = copy->next;
 			}
 			promsf = temp / contador;
+			free(copy);
 			return promsf;
 		}
 	}
 
-	free(copy);
 }
 
 void ciudadCalida(struct city *Cordoba, struct city *SF, struct city *Mendoza)
@@ -346,8 +348,8 @@ void ciudadCalida(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 		}
 
 	cout<<"La ciudad mas calida de Santa Fe es "<<cSF<<endl;
-
 	free(copy);
+
 }
 
 void ciudadFria(struct city *Cordoba, struct city *SF, struct city *Mendoza)
@@ -388,8 +390,8 @@ void ciudadFria(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 		}
 
 	cout<<"La ciudad mas fri­a de Santa Fe es "<<fSF<<endl;
-
 	free(copy);
+
 }
 
 void diaCalido(struct city *Cordoba, struct city *SF, struct city *Mendoza)

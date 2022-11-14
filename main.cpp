@@ -60,9 +60,10 @@ int main(int argc, char *argv[])
 		case 0:
 			break;
 		default:
-			cout << "Lo sentimos, esta opci?n no existe, int?ntelo de nuevo" << endl;
+			cout << "Lo sentimos, esta opcion no existe, intentelo de nuevo" << endl;
 			break;
 		}
 	} while (op != 0);
+	
 	return 0;
 }
