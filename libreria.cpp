@@ -28,7 +28,7 @@ void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mend
 	char nombre[50];
 
 	//creación de listas complementarias (copy, y los heads)
-	city *copy = NULL, *headC = NULL, *headSF = NULL, *headM = NULL, *newNode=NULL;
+	city *copy = NULL, *newNode=NULL;
 	file = fopen("./data_set.txt", "r");
 
 	//recorrido del archivo
@@ -45,7 +45,7 @@ void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mend
 		/*este if se hace para cargar cada medición en su correspondiente
 		provincia, según su código de provincia*/
 		if (codProv == 3)
-		{	
+		{
 			newNode->cityId = codCiud;
 			strcpy(newNode->cityName, nombre);
 			newNode->m.hum = hum;
@@ -55,20 +55,19 @@ void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mend
 			newNode->m.time.mm = mm;
 			newNode->m.time.hh = hh;
 			newNode->next = NULL;
-			*Cordoba=newNode;
 
-			if (headC == NULL)
+			if (*Cordoba == NULL)
 			{
-				headC = *Cordoba;
+				*Cordoba= newNode;
 			}
 			else
 			{
-				copy = headC;
-				while (copy == NULL)
+				copy = *Cordoba;
+				while (copy->next != NULL)
 				{
 					copy = copy->next;
 				}
-				copy->next = *Cordoba;
+				copy->next = newNode;
 			}
 		}
 		else
@@ -84,20 +83,19 @@ void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mend
 				newNode->m.time.mm = mm;
 				newNode->m.time.hh = hh;
 				newNode->next = NULL;
-				*Mendoza=newNode;
 
-				if (headM == NULL)
+				if (*Mendoza == NULL)
 				{
-					headM = *Mendoza;
+					*Mendoza= newNode;
 				}
 				else
 				{
-					copy = headM;
-					while (copy == NULL)
+					copy = *Mendoza;
+					while (copy->next != NULL)
 					{
 						copy = copy->next;
 					}
-					copy->next = *Mendoza;
+					copy->next = newNode;
 				}
 			}
 			else
@@ -113,54 +111,57 @@ void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mend
 					newNode->m.time.mm = mm;
 					newNode->m.time.hh = hh;
 					newNode->next = NULL;
-					*SF=newNode;
+		
 
-					if (headSF == NULL)
+					if (*SF == NULL)
 					{
-						headSF = *SF;
+						*SF = newNode;
 					}
 					else
 					{
-						copy = headSF;
-						while (copy == NULL)
+						copy = *SF;
+						while (copy->next != NULL)
 						{
 							copy = copy->next;
 						}
-						copy->next = *SF;
+						copy->next = newNode;
 					}
 				}
 			}
 		}
 		
 	}
+	
+	
 	fclose(file);
 	//liberar memoria
 	free(copy);
 }
 
-int total(int num, struct city **Cordoba, struct city **SF, struct city **Mendoza)
-{
+
+void total(int num, struct city **Cordoba, struct city **SF, struct city **Mendoza){
 	
 	//no s� por qu� no me funciona esto
-	int cba = 0, men = 0, sf = 0;
-	city *copy = NULL;	
-	
+	int men = 0, sf = 0, numero=0;
+	long cba=0;
+	city *copy = NULL;
+	numero=num;
 	
 
-	if (num == 3)
-	{
+	if (numero == 3){
+		
 		copy = *Cordoba;
-		while (copy != NULL){
+		while (copy != NULL)
+		{
 			cba =cba+ 1;
 			copy = copy->next;
 		}
 
 		cout << "La cantidad de mediciones tomadas en Cordoba es de: " << cba<<endl;
-		return cba;
 	}
 	else
 	{
-		if (num == 1)
+		if (numero == 1)
 		{
 			copy = *Mendoza;
 			while (copy != NULL)
@@ -170,7 +171,6 @@ int total(int num, struct city **Cordoba, struct city **SF, struct city **Mendoz
 			}
 
 			cout << "La cantidad de mediciones tomadas en Mendoza es de: " << men<<endl;
-			return men;
 		}
 		else
 		{
@@ -182,14 +182,14 @@ int total(int num, struct city **Cordoba, struct city **SF, struct city **Mendoz
 			}
 
 			cout << "La cantidad de mediciones tomadas en Santa Fe es de: " << sf<<endl;
-			return sf;
 		}
 	}
+	
 	free(copy);
 }
 
 void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
-{	int ciudades=0, i=0;
+{	int ciudades=0;
 	float acumulador=0, cant=0, t=0;
 	
 	city *copy=NULL;

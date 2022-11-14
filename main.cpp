@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	//instanciando el objeto
 	Archivo archivo;
 
-	int op = 0, cba_med = 0, men_med = 0, sf_med = 0;
+	int op = 0;
 	float tempcba = 0, tempmen = 0, tempsf = 0;
 
 	//carga de datos a las listas
@@ -29,9 +29,9 @@ int main(int argc, char *argv[])
 		switch (op)
 		{
 		case 1:
-			men_med = total(1, &Cordoba, &SF, &Mendoza);
-			sf_med = total(2, &Cordoba, &SF, &Mendoza);
-			cba_med = total(3, &Cordoba, &SF, &Mendoza);
+			total(1, &Cordoba, &SF, &Mendoza);
+			total(2, &Cordoba, &SF, &Mendoza);
+			total(3, &Cordoba, &SF, &Mendoza);
 			break;
 		case 2:
 			tempmen = promProv(1, Cordoba, SF, Mendoza);
