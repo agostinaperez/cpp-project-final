@@ -140,7 +140,7 @@ void Archivo::get(struct city ** Cordoba, struct city ** SF, struct city ** Mend
 
 void total(int num, struct city **Cordoba, struct city **SF, struct city **Mendoza){
 	
-	//no sé por qué no me funciona esto
+	//no sï¿½ por quï¿½ no me funciona esto
 	int men = 0, sf = 0, numero=0;
 	long cba=0;
 	city *copy = NULL;
@@ -190,7 +190,7 @@ void total(int num, struct city **Cordoba, struct city **SF, struct city **Mendo
 void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 {	int ciudades=0;
 	float acumulador=0, cant=0, t=0;
-	
+	string nombre;
 	city *copy=NULL;
 	int cod_ciud=0;
 	copy=Cordoba;
@@ -201,11 +201,12 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 		if (cod_ciud==ciudades){
 			acumulador+=copy->m.temp;
 			cant+=1;
+			nombre=copy->cityName;
 
 		}
 		else{
 			t=(acumulador/cant);
-			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<t<<endl;
+			cout<<"La temperatura promedio de la ciudad "<<nombre<<" es de "<<t<<endl;
 			ciudades+=1;
 		}
 
@@ -222,11 +223,11 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 		if (cod_ciud==ciudades){
 			acumulador=acumulador+copy->m.temp;
 			cant+=1;
-
+			nombre=copy->cityName;
 		}
 		else{
 			t=acumulador/cant;
-			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<t<<endl;
+			cout<<"La temperatura promedio de la ciudad "<<nombre<<" es de "<<t<<endl;
 			ciudades+=1;
 		}
 
@@ -243,11 +244,11 @@ void promCiud(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 		if (cod_ciud==ciudades){
 			acumulador+=copy->m.temp;
 			cant+=1;
-
+			nombre=copy->cityName;
 		}
 		else{
 			t=acumulador/cant;
-			cout<<"La temperatura promedio de la ciudad "<<copy->cityName<<" es de "<<t<<endl;
+			cout<<"La temperatura promedio de la ciudad "<<nombre<<" es de "<<t<<endl;
 			ciudades+=1;
 		}
 
@@ -365,7 +366,7 @@ void ciudadFria(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"La ciudad mas fri­a de Cordoba es "<<fCor<<endl;
+	cout<<"La ciudad mas fria de Cordoba es "<<fCor<<endl;
 
 	menor=100;
 	copy=Mendoza;
@@ -377,7 +378,7 @@ void ciudadFria(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"La ciudad mas fri­a de Mendoza es "<<fMen<<endl;
+	cout<<"La ciudad mas fria de Mendoza es "<<fMen<<endl;
 
 	menor=100;
 	copy=SF;
@@ -389,7 +390,7 @@ void ciudadFria(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"La ciudad mas fri­a de Santa Fe es "<<fSF<<endl;
+	cout<<"La ciudad mas fria de Santa Fe es "<<fSF<<endl;
 	free(copy);
 
 }
@@ -453,7 +454,7 @@ void diaFrio(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"El dia mas fri­o de Cordoba fue el "<<dia<<"/"<<mes<<endl;
+	cout<<"El dia mas frio de Cordoba fue el "<<dia<<"/"<<mes<<endl;
 
 	menor=100;
 	copy=Mendoza;
@@ -466,7 +467,7 @@ void diaFrio(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"El dia mas fri­o de Mendoza fue el "<<dia<<"/"<<mes<<endl;
+	cout<<"El dia mas frio de Mendoza fue el "<<dia<<"/"<<mes<<endl;
 
 	menor=100;
 	copy=SF;
@@ -479,7 +480,7 @@ void diaFrio(struct city *Cordoba, struct city *SF, struct city *Mendoza)
 			copy = copy->next;
 		}
 
-	cout<<"El dia mas fri­o de Santa Fe fue el "<<dia<<"/"<<mes<<endl;
+	cout<<"El dia mas frio de Santa Fe fue el "<<dia<<"/"<<mes<<endl;
 
 	free(copy);
 }
